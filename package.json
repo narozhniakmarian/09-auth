@@ -13,6 +13,7 @@
     "@tanstack/react-query-devtools": "^5.87.4",
     "axios": "^1.12.2",
     "clsx": "^2.1.1",
+    "cookie": "^1.0.2",
     "formik": "^2.4.6",
     "framer-motion": "^12.23.12",
     "modern-normalize": "^3.0.1",

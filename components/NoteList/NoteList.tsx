@@ -1,9 +1,9 @@
-import { deleteNote } from "@/lib/api";
 import { Note } from "@/types/note";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import css from "./NoteList.module.css";
 import Link from "next/link";
+import { deleteNoteRequest } from "@/lib/api/clientApi";
 
 interface NoteListProps {
   notes: Note[];
@@ -13,7 +13,7 @@ export default function NoteList({ notes }: NoteListProps) {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async (id: string) => {
-      const res = await deleteNote(id);
+      const res = await deleteNoteRequest(id);
       return res;
     },
     onSuccess: () => {

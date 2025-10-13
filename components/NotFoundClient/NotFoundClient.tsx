@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-// import css from "./NotFoundClient.module.css";
 
 export default function NotFoundClient() {
   const router = useRouter();

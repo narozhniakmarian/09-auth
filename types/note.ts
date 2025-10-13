@@ -1,18 +1,18 @@
-//types/note.ts
-
 export interface Note {
   id: string;
   title: string;
   content: string;
+  tag: NoteTag;
   createdAt: string;
   updatedAt: string;
-  tag: NoteTag;
 }
 
-export interface NotePost {
+export type NoteTag = 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
+
+export const NOTE_TAGS: NoteTag[] = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
+
+export interface CreateNoteRequest {
   title: string;
   content: string;
   tag: NoteTag;
 }
-
-export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";

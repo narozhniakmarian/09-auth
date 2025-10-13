@@ -2,10 +2,21 @@
 
 // import Link from "next/link";
 import css from "./SidebarNotes.module.css";
-import { tags } from "@/constants/tags";
 import AnimatedLink from "./AnimatedLink/AnimatedLink";
+import { NoteTag } from "@/types/note";
 
-const SidebarNotes = () => {
+type TagType = NoteTag | "All";
+
+const SidebarNotesComponent = () => {
+  const tags: TagType[] = [
+    "All",
+    "Todo",
+    "Work",
+    "Personal",
+    "Meeting",
+    "Shopping",
+  ];
+
   return (
     <div>
       <ul className={css.menuList}>
@@ -18,16 +29,9 @@ const SidebarNotes = () => {
             />
           </li>
         ))}
-        {/* <li className={css.menuItem}>
-          <AnimatedLink
-            href="/notes/action/create"
-            text="Create note"
-            className={css.menuLink}
-          />
-        </li> */}
       </ul>
     </div>
   );
 };
 
-export default SidebarNotes;
+export default SidebarNotesComponent;
