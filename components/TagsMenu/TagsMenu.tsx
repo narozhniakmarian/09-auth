@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { NoteTag } from "@/types/note";
-import css from "@/components/TagsMenu/TagsMenu.module.css";
+import { NoteTag } from "../../types/note";
+import css from "./TagsMenu.module.css";
 
 type TagType = NoteTag | "All";
 
