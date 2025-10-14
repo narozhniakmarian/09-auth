@@ -78,7 +78,7 @@ const TagsMenu = ({ onNavigate }: TagsMenuProps) => {
   };
 
   return (
-    <div ref={containerRef} className={css.menuContainer}>
+    <div ref={containerRef} >
       <button
         type="button"
       
@@ -98,9 +98,7 @@ const TagsMenu = ({ onNavigate }: TagsMenuProps) => {
               <Link
                 href={href}
                 role="menuitem"
-                ${
-                  isActive ? ` ${css.activeLink}` : ""
-                }`}
+              
                 onClick={handleNavigate}
               >
                 {label}
