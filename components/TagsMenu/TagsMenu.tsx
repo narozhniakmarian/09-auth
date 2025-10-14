@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { NoteTag } from "../../types/note";
-import css from "./TagsMenu.module.css";
+// import css from "./TagsMenu.module.css";
 
 type TagType = NoteTag | "All";
 
@@ -38,20 +38,26 @@ const TagsMenu = () => {
   }, [isOpen]);
 
   return (
-    <div className={css.menuContainer} ref={menuRef}>
-      <button className={css.menuButton} onClick={toggle}>
-        Notes ▾
+    <div className="relative inline-block" ref={menuRef}>
+      <button
+        onClick={toggle}
+        className="relative !px-[6px] !py-[4px] text-white text-[16px] bg-blue-600 rounded z-0 transition-colors hover:bg-blue-700 active:bg-blue-700 glow-button"
+      >
+        <span className="relative z-10 px-[3px] py-[12px]">Notes ▾</span>
+        <span className="absolute inset-0 rounded bg-blue-600 z-[-1] glow-base px-[3px] py-[12px]"></span>
+        <span className="absolute -top-[2px] -left-[2px] w-[calc(100%+4px)] h-[calc(100%+4px)] rounded z-[-1] glow-overlay px-[3px] py-[12px]"></span>
       </button>
+
       {isOpen && (
-        <ul className={css.menuList}>
+        <ul className="absolute top-[calc(100%+6px)] left-0 !px-[6px] !py-[6px] bg-blue-600 border border-gray-300 rounded-lg shadow-lg  list-none z-[1000]">
           {tags.map((el) => (
-            <li className={css.menuItem} key={el}>
+            <li key={el}>
               <Link
                 href={
                   el === "All" ? "/notes/filter/All" : `/notes/filter/${el}`
                 }
-                className={css.menuLink}
                 onClick={() => setIsOpen(false)}
+                className="block px-4 py-2 text-[#f0f0f0] text-[15px] no-underline hover:bg-[#65aff4] transition-colors"
               >
                 {el}
               </Link>

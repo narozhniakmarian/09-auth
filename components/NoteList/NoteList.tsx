@@ -1,5 +1,5 @@
 import { Note } from "@/types/note";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import css from "./NoteList.module.css";
 import Link from "next/link";
