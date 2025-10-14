@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NOTE_TAGS, type NoteTag } from "@/types/note";
 // import css from "./TagsMenu.module.css";
+import css from ".//TagsMenu.module.css";
 
 type TagOption = NoteTag | "All";
 
