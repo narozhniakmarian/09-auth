@@ -81,24 +81,24 @@ const TagsMenu = ({ onNavigate }: TagsMenuProps) => {
     <div ref={containerRef} className={css.menuContainer}>
       <button
         type="button"
-        className={css.menuButton}
+      
         aria-haspopup="menu"
         aria-expanded={isOpen}
         onClick={handleToggle}
       >
         Notes ▾
       </button>
-      <ul className={css.menuList} role="menu" hidden={!isOpen}>
+      <ul  role="menu" hidden={!isOpen}>
         {TAG_OPTIONS.map(({ label, value }) => {
           const href = getHrefForTag(value);
           const isActive = value === activeTag;
 
           return (
-            <li key={value} className={css.menuItem} role="none">
+            <li key={value} role="none">
               <Link
                 href={href}
                 role="menuitem"
-                className={`${css.menuLink}${
+                ${
                   isActive ? ` ${css.activeLink}` : ""
                 }`}
                 onClick={handleNavigate}
