@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { useEffect, useMemo, useRef, useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { NOTE_TAGS, type NoteTag } from '@/types/note';
-import css from './TagsMenu.module.css';
+import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { NOTE_TAGS, type NoteTag } from "@/types/note";
+import css from "./TagsMenu.module.css";
 
-type TagOption = NoteTag | 'All';
+type TagOption = NoteTag | "All";
 
 type TagsMenuProps = {
   onNavigate?: () => void;
 };
 
 const TAG_OPTIONS: Array<{ label: string; value: TagOption }> = [
-  { label: 'All notes', value: 'All' },
+  { label: "All notes", value: "All" },
   ...NOTE_TAGS.map((tag) => ({ label: tag, value: tag })),
 ];
 
 const getHrefForTag = (tag: TagOption) =>
-  tag === 'All' ? '/notes/filter/All' : `/notes/filter/${tag}`;
+  tag === "All" ? "/notes/filter/All" : `/notes/filter/${tag}`;
 
 const TagsMenu = ({ onNavigate }: TagsMenuProps) => {
   const pathname = usePathname();
@@ -29,15 +29,18 @@ const TagsMenu = ({ onNavigate }: TagsMenuProps) => {
     if (!isOpen) return;
 
     const handleOutsideClick = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener("click", handleOutsideClick);
 
     return () => {
-      document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener("click", handleOutsideClick);
     };
   }, [isOpen]);
 
@@ -46,18 +49,21 @@ const TagsMenu = ({ onNavigate }: TagsMenuProps) => {
   }, [pathname]);
 
   const activeTag = useMemo<TagOption>(() => {
-    const segments = pathname.split('/').filter(Boolean);
-    const tagCandidate = segments.length >= 3 && segments[0] === 'notes' && segments[1] === 'filter'
-      ? segments[2]
-      : undefined;
+    const segments = pathname.split("/").filter(Boolean);
+    const tagCandidate =
+      segments.length >= 3 &&
+      segments[0] === "notes" &&
+      segments[1] === "filter"
+        ? segments[2]
+        : undefined;
 
-    if (!tagCandidate || tagCandidate === 'All') {
-      return 'All';
+    if (!tagCandidate || tagCandidate === "All") {
+      return "All";
     }
 
     return NOTE_TAGS.includes(tagCandidate as NoteTag)
       ? (tagCandidate as NoteTag)
-      : 'All';
+      : "All";
   }, [pathname]);
 
   const handleToggle = () => {
@@ -92,7 +98,9 @@ const TagsMenu = ({ onNavigate }: TagsMenuProps) => {
               <Link
                 href={href}
                 role="menuitem"
-                className={`${css.menuLink}${isActive ? ` ${css.activeLink}` : ''}`}
+                className={`${css.menuLink}${
+                  isActive ? ` ${css.activeLink}` : ""
+                }`}
                 onClick={handleNavigate}
               >
                 {label}
