@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { NoteTag } from "@/types/note";
-import css from "./TagsMenu.module.css";
+import css from "@/components/TagsMenu/TagsMenu.module.css";
 
 type TagType = NoteTag | "All";
 
@@ -21,7 +21,7 @@ const TagsMenu = () => {
     "Meeting",
     "Shopping",
   ];
-
+  console.log(css);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
