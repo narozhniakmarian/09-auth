@@ -52,7 +52,7 @@ const SignInPage = () => {
       const destination =
         redirectTarget && redirectTarget.startsWith("/")
           ? redirectTarget
-          : "/profile";
+          : "/notes/filter/All";
 
       window.location.href = destination;
     } catch (error: unknown) {

@@ -5,7 +5,6 @@ import {
   fetchNotesRequest,
   fetchNoteByIdRequest,
   createNoteRequest,
-  updateNoteRequest,
   deleteNoteRequest,
   type FetchNotesParams,
 } from "./clientApi";
@@ -44,11 +43,6 @@ export const fetchNoteByIdServer = async (id: string) =>
 
 export const createNoteServer = async (payload: CreateNoteRequest) =>
   createNoteRequest(payload, await mergeConfigs());
-
-export const updateNoteServer = async (
-  id: string,
-  payload: CreateNoteRequest
-) => updateNoteRequest(id, payload, await mergeConfigs());
 
 export const deleteNoteServer = async (id: string) =>
   deleteNoteRequest(id, await mergeConfigs());
@@ -98,4 +92,15 @@ export const updateUserServer = async (payload: UpdateUserRequest) => {
   );
 
   return response.data;
+};
+
+export const checkServerSession = async () => {
+  const cookieStore = await cookies();
+  const res = await api.get("/auth/session", {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+
+  return res;
 };
