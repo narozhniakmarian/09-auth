@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import type { Note, CreateNoteRequest } from '@/types/note';
-import { updateNote } from '@/lib/api/clientApi';
-import css from './NoteEditForm.module.css';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { Note, CreateNoteRequest } from "@/types/note";
+import { updateNote } from "@/lib/api/clientApi";
+import css from "./NoteEditForm.module.css";
 
 interface NoteEditFormProps {
   note: Note;
@@ -14,16 +14,16 @@ interface NoteEditFormProps {
 
 const validationSchema = Yup.object({
   title: Yup.string()
-    .min(3, 'Must be at least 3 characters')
-    .max(50, 'Must be 50 characters or less')
-    .required('Required'),
+    .min(3, "Must be at least 3 characters")
+    .max(50, "Must be 50 characters or less")
+    .required("Required"),
   content: Yup.string()
-    .min(10, 'Must be at least 10 characters')
-    .max(500, 'Must be 500 characters or less')
-    .required('Required'),
+    .min(10, "Must be at least 10 characters")
+    .max(500, "Must be 500 characters or less")
+    .required("Required"),
   tag: Yup.string()
-    .oneOf(['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'])
-    .required('Required'),
+    .oneOf(["Todo", "Work", "Personal", "Meeting", "Shopping"])
+    .required("Required"),
 });
 
 const NoteEditForm = ({ note, onCancel }: NoteEditFormProps) => {
@@ -32,8 +32,8 @@ const NoteEditForm = ({ note, onCancel }: NoteEditFormProps) => {
   const mutation = useMutation({
     mutationFn: (values: CreateNoteRequest) => updateNote(note.id, values),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['note', note.id] });
-      queryClient.invalidateQueries({ queryKey: ['notes'] });
+      queryClient.invalidateQueries({ queryKey: ["note", note.id] });
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
       onCancel();
     },
   });
@@ -71,7 +71,11 @@ const NoteEditForm = ({ note, onCancel }: NoteEditFormProps) => {
               rows="4"
               className={css.textarea}
             />
-            <ErrorMessage name="content" component="div" className={css.error} />
+            <ErrorMessage
+              name="content"
+              component="div"
+              className={css.error}
+            />
           </div>
 
           <div className={css.field}>
@@ -93,7 +97,7 @@ const NoteEditForm = ({ note, onCancel }: NoteEditFormProps) => {
               disabled={isSubmitting || mutation.isPending}
               className={css.submitButton}
             >
-              {mutation.isPending ? 'Saving...' : 'Save Changes'}
+              {mutation.isPending ? "Saving..." : "Save Changes"}
             </button>
             <button
               type="button"

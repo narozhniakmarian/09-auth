@@ -1,3 +1,5 @@
+//lib>api>clientApi.ts
+
 import type { AxiosRequestConfig } from "axios";
 import { nextServer } from "./api";
 import type { Note, CreateNoteRequest } from "@/types/note";
@@ -69,6 +71,21 @@ export const createNoteRequest = async (
 
 export const createNote = async (payload: CreateNoteRequest) =>
   createNoteRequest(payload);
+
+export const updateNoteRequest = async (
+  id: string,
+  payload: CreateNoteRequest,
+  config?: AxiosRequestConfig
+) => {
+  const response = await nextServer.patch<Note>(`/notes/${id}`, payload, {
+    ...config,
+  });
+
+  return response.data;
+};
+
+export const updateNote = async (id: string, payload: CreateNoteRequest) =>
+  updateNoteRequest(id, payload);
 
 export const deleteNoteRequest = async (
   id: string,

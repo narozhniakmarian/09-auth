@@ -1,13 +1,15 @@
-'use client';
+// app>(private router)>notes>[id]>Notedatailis.clilent.tsx
 
-import { useCallback, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchNoteById, deleteNote } from '@/lib/api/clientApi';
-import Modal from '@/components/Modal/Modal';
-import NoteEditForm from './NoteEditForm';
-import DeleteConfirmModal from './DeleteConfirmModal';
-import css from './NoteDetails.module.css';
+"use client";
+
+import { useCallback, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { fetchNoteById, deleteNote } from "@/lib/api/clientApi";
+import Modal from "@/components/Modal/Modal";
+import NoteEditForm from "./NoteEditForm";
+import DeleteConfirmModal from "./DeleteConfirmModal";
+import css from "./NoteDetails.module.css";
 
 const NoteDetailsClient = () => {
   const params = useParams();
@@ -17,25 +19,29 @@ const NoteDetailsClient = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const { data: note, isLoading, error } = useQuery({
-    queryKey: ['note', id],
+  const {
+    data: note,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
     refetchOnMount: false,
   });
 
   const handleNavigateBack = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history.length > 1) {
+    if (typeof window !== "undefined" && window.history.length > 1) {
       router.back();
       return;
     }
 
-    router.push('/notes/filter/All');
+    router.push("/notes/filter/All");
   }, [router]);
 
   const deleteMutation = useMutation({
     mutationFn: deleteNote,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['notes'] });
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
       handleNavigateBack();
     },
   });
@@ -87,13 +93,18 @@ const NoteDetailsClient = () => {
         <p className={css.content}>{note.content}</p>
         <div className={css.footer}>
           <span className={css.tag}>{note.tag}</span>
-          <p className={css.date}>{new Date(note.createdAt).toLocaleDateString()}</p>
+          <p className={css.date}>
+            {new Date(note.createdAt).toLocaleDateString()}
+          </p>
         </div>
       </div>
 
       {isEditModalOpen && (
         <Modal onClose={() => setIsEditModalOpen(false)}>
-          <NoteEditForm note={note} onCancel={() => setIsEditModalOpen(false)} />
+          <NoteEditForm
+            note={note}
+            onCancel={() => setIsEditModalOpen(false)}
+          />
         </Modal>
       )}
 
