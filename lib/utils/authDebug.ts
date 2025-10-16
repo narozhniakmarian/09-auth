@@ -1,10 +1,11 @@
+//lib>utils>authDebug.ts
 const MASK_PREFIX = 6;
 const MASK_SUFFIX = 4;
 
-export const isAuthDebugEnabled = process.env.NEXT_PUBLIC_AUTH_DEBUG === 'true';
+export const isAuthDebugEnabled = process.env.NEXT_PUBLIC_AUTH_DEBUG === "true";
 
 export const maskToken = (value?: string | null) => {
-  if (!value) return 'none';
+  if (!value) return "none";
   if (value.length <= MASK_PREFIX + MASK_SUFFIX) {
     return `${value.slice(0, 2)}...${value.slice(-2)}`;
   }
@@ -14,13 +15,13 @@ export const maskToken = (value?: string | null) => {
 export const parseCookieHeader = (cookieHeader?: string | null) => {
   if (!cookieHeader) return {} as Record<string, string>;
   return cookieHeader
-    .split(';')
+    .split(";")
     .map((pair) => pair.trim())
     .filter(Boolean)
     .reduce<Record<string, string>>((acc, pair) => {
-      const [name, ...rest] = pair.split('=');
+      const [name, ...rest] = pair.split("=");
       if (name) {
-        acc[name] = rest.join('=');
+        acc[name] = rest.join("=");
       }
       return acc;
     }, {});
@@ -37,7 +38,10 @@ export const debugCookies = (cookieHeader?: string | null) => {
   };
 };
 
-export const logAuthDebug = (context: string, details: Record<string, unknown>) => {
+export const logAuthDebug = (
+  context: string,
+  details: Record<string, unknown>
+) => {
   if (!isAuthDebugEnabled) return;
   console.log(`[auth-debug] ${context}`, JSON.stringify(details));
 };

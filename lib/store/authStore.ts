@@ -1,5 +1,6 @@
-import { create, type StoreApi } from 'zustand';
-import type { User } from '@/types/user';
+//lib>stote>useAuthStore.ts
+import { create, type StoreApi } from "zustand";
+import type { User } from "@/types/user";
 
 export type AuthState = {
   user: User | null;
@@ -8,7 +9,7 @@ export type AuthState = {
   clearIsAuthenticated: () => void;
 };
 
-type SetState = StoreApi<AuthState>['setState'];
+type SetState = StoreApi<AuthState>["setState"];
 
 export const useAuthStore = create<AuthState>()((set: SetState) => ({
   user: null,
