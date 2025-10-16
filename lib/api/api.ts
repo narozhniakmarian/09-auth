@@ -1,12 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
+
+const PUBLIC_API_UR = process.env.NEXT_PUBLIC_API_URL;
 
 export const nextServer = axios.create({
-  baseURL: '/api',
+  baseURL: "/api",
   withCredentials: true,
 });
 
 export const api = axios.create({
-  baseURL: 'https://notehub-api.goit.study',
+  baseURL: PUBLIC_API_UR,
   withCredentials: true,
 });
-

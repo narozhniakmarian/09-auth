@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { isAxiosError, type AxiosError } from "axios";
 import { login } from "@/lib/api/clientApi";
 import { useAuthStore, type AuthState } from "@/lib/store/authStore";
@@ -12,6 +12,7 @@ const isValidEmail = (value: string) => /.+@.+\..+/.test(value);
 
 const SignInPage = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const setUser = useAuthStore((state: AuthState) => state.setUser);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,8 +54,7 @@ const SignInPage = () => {
         redirectTarget && redirectTarget.startsWith("/")
           ? redirectTarget
           : "/notes/filter/All";
-
-      window.location.href = destination;
+      router.push(destination);
     } catch (error: unknown) {
       if (isAxiosError(error)) {
         const axiosError = error as AxiosError<{

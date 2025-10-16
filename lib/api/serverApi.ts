@@ -1,4 +1,4 @@
-//lib>api>serverApi.ts
+//lib>api>serverApi
 import type { AxiosRequestConfig } from "axios";
 import { cookies } from "next/headers";
 import { api } from "./api";
