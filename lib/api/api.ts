@@ -1,13 +1,10 @@
 import axios from "axios";
 
-const PUBLIC_API_UR = process.env.NEXT_PUBLIC_API_URL;
+const isServer = typeof window === "undefined";
 
-export const nextServer = axios.create({
-  baseURL: "/api",
-  withCredentials: true,
-});
+const baseURL = isServer ? process.env.NEXT_PUBLIC_API_URL : "/api";
 
 export const api = axios.create({
-  baseURL: PUBLIC_API_UR,
+  baseURL,
   withCredentials: true,
 });
