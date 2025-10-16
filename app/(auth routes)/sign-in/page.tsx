@@ -105,6 +105,7 @@ const SignInPage = () => {
             type="email"
             name="email"
             className={css.input}
+            autoComplete="email"
             required
           />
         </div>
@@ -116,6 +117,7 @@ const SignInPage = () => {
             type="password"
             name="password"
             className={css.input}
+            autoComplete="current-password"
             required
           />
         </div>
