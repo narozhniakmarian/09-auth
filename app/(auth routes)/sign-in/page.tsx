@@ -53,7 +53,7 @@ const SignInPage = () => {
       const destination =
         redirectTarget && redirectTarget.startsWith("/")
           ? redirectTarget
-          : "/notes/filter/All";
+          : "/profile";
       router.push(destination);
     } catch (error: unknown) {
       if (isAxiosError(error)) {
